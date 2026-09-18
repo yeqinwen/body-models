@@ -3,7 +3,7 @@ import trimesh
 import numpy as np
 import torch
 # from body_models.soma.numpy import SOMA
-from body_models.soma.torch import SOMA
+from body_models.smplx.torch import SMPLX
 from pytorch3d.io import load_obj, save_obj
 from pytorch3d.structures import Meshes
 
@@ -26,7 +26,7 @@ loss_weights_dict = {
     'pose': 100,  # 姿态正则化：把人体向A姿态拉
 }
 
-model = SOMA().to(device)
+model = SMPLX(gender="female").to(device)
 params = model.get_apose(batch_dims=(1,))
 vertices = model.forward_vertices(**params)
 
@@ -34,8 +34,6 @@ vertices = model.forward_vertices(**params)
 for k,v in params.items():
     if torch.is_tensor(v):
         print(k, v.device)
-breakpoint()
-
 
 # 初始A姿态
 initial_A_pose = params["body_pose"].clone().detach().to(device)
@@ -116,7 +114,7 @@ for i in range(MAX_ITER):
 
     # ==================== 8. 损失函数定义（从外部导入） ====================
     loss_dict = {}
-    chamfer_loss = Chamfer_loss(star_mesh, scan_mesh, num_samples=5000)  # 采样5000，速度更快，采样30000，拟合更精确
+    chamfer_loss = Chamfer_loss(star_mesh, scan_mesh, num_samples=30000)  # 采样5000，速度更快，采样30000，拟合更精确
     shape_reg_loss = Shape_reg_loss(params["shape"])
     pose_reg_loss = Pose_reg_loss(params["body_pose"], initial_A_pose)
 

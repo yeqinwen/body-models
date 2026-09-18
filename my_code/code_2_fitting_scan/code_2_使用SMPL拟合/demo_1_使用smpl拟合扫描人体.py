@@ -3,7 +3,7 @@ import trimesh
 import numpy as np
 import torch
 # from body_models.soma.numpy import SOMA
-from body_models.smplx.torch import SMPLX
+from body_models.smpl.torch import SMPL
 from pytorch3d.io import load_obj, save_obj
 from pytorch3d.structures import Meshes
 
@@ -17,7 +17,7 @@ else:
 
 # ==================== 2. 参数配置 ====================
 BATCH_SIZE = 1
-MAX_ITER = 3000
+MAX_ITER = 1000
 
 # 损失函数权重：控制各项损失在总优化目标中的重要性
 loss_weights_dict = {
@@ -26,7 +26,7 @@ loss_weights_dict = {
     'pose': 100,  # 姿态正则化：把人体向A姿态拉
 }
 
-model = SMPLX(gender="female").to(device)
+model = SMPL(gender="female").to(device)
 params = model.get_apose(batch_dims=(1,))
 vertices = model.forward_vertices(**params)
 
@@ -34,7 +34,6 @@ vertices = model.forward_vertices(**params)
 for k,v in params.items():
     if torch.is_tensor(v):
         print(k, v.device)
-breakpoint()
 
 
 # 初始A姿态
