@@ -1,36 +1,34 @@
-import polyscope as ps
-
 # from body_models.smpl.numpy import SMPL
 from body_models.smpl.torch import SMPL
+import torch
+import polyscope as ps
 
-model = SMPL(gender="female")
+if torch.cuda.is_available():
+    device = torch.device("cuda:0")
+else:
+    device = torch.device("cpu")
+    print("WARNING: CPU only, this will be slow!")
+
+model = SMPL(gender="female").to(device)  # 将SMPL模型放到GPU上
 params = model.get_rest_pose(batch_dims=(1,))
 
+# 打印参数
 print(params.keys())
-
 for k, v in params.items():
-    print(k, v.shape)
-    print(v)
-
-
-
+    if torch.is_tensor(v):
+        print(k, v.device)
 
 vertices = model.forward_vertices(**params)
 skeleton = model.forward_skeleton(**params)
-
 faces = model.faces
 
-print(vertices.shape)
-print(skeleton.shape)
-print(faces.shape)
-
-print(vertices)
-print(faces)
+vertices = vertices[0].cpu().numpy()
+faces = faces.cpu().numpy()
 
 ps.init()
-ps.register_surface_mesh("mesh", vertices[0], faces,
+ps.register_surface_mesh("mesh", vertices, faces,
                          color=[0, 91 / 255, 255 / 255],
-                         edge_width=0.3,
+                         edge_width=0.003,
                          edge_color=[1, 1, 1],
                          smooth_shade=True,
                          # material="flat"
