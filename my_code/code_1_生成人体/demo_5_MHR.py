@@ -17,6 +17,13 @@ print(faces.shape)
 print(vertices)
 print(faces)
 
+# 打印参数
+print(params.keys())
+for k, v in params.items():
+    print(k, v.shape)
+
+
+
 ps.set_build_gui(False)
 ps.init()
 ps.register_surface_mesh("mesh", vertices[0], faces,

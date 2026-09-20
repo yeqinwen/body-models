@@ -22,8 +22,8 @@ MAX_ITER = 500
 # 损失函数权重：控制各项损失在总优化目标中的重要性
 loss_weights_dict = {
     'chamfer': 1000000,  # 主要数据项：强制STAR顶点贴近扫描点云
-    'shape': 10,  # 形状正则化：防止体形参数过度变形
-    'pose': 100,  # 姿态正则化：把人体向A姿态拉
+    'shape': 1,  # 形状正则化：防止体形参数过度变形
+    'pose': 10,  # 姿态正则化：把人体向A姿态拉
 }
 
 model = SOMA().to(device)
@@ -44,7 +44,7 @@ star_v_np = vertices[0].cpu().numpy()
 star_f_np = model.faces.cpu().numpy()
 
 # ==================== 4. 加载扫描人体 ====================
-path = "rotate_scan.obj"
+path = "dhu_scan_1_sc.obj"
 verts, faces, aux = load_obj(path)
 scan_v_np = verts.cpu().numpy()
 scan_f_np = faces.verts_idx.cpu().numpy()
@@ -98,7 +98,7 @@ optim_params = [params["shape"],
                 params["global_rotation"],
                 params["global_translation"]]
 
-optimizer = torch.optim.Adam(optim_params, lr=0.01)
+optimizer = torch.optim.Adam(optim_params, lr=0.003)
 scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=200, gamma=0.5)
 
 star_f_tensor = torch.tensor(star_f_np, dtype=torch.int64, device=device)
