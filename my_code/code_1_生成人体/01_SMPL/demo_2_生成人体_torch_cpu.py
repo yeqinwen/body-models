@@ -19,7 +19,7 @@ for k, v in params.items():
     if torch.is_tensor(v):
         print(k, v.device)
 
-
+ps.set_build_gui(False)
 ps.init()
 ps.register_surface_mesh("mesh", vertices[0], faces,
                          color=[0, 91 / 255, 255 / 255],

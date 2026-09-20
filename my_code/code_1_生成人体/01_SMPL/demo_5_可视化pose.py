@@ -33,7 +33,9 @@ bones = [
     (12, 15),  # 脖子 -> 头
 ]
 
+
 ps.init()
+ps.set_build_gui(False)
 ps.register_surface_mesh("mesh", vertices, faces,
                          color=[0, 91 / 255, 255 / 255],
                          edge_width=0.003,

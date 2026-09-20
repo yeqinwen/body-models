@@ -15,8 +15,7 @@ params = model.get_rest_pose(batch_dims=(1,))
 # 打印参数
 print(params.keys())
 for k, v in params.items():
-    if torch.is_tensor(v):
-        print(k, v.device)
+    print(k, v.shape)
 
 vertices = model.forward_vertices(**params)
 skeleton = model.forward_skeleton(**params)

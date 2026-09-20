@@ -17,10 +17,11 @@ print(faces.shape)
 print(vertices)
 print(faces)
 
+ps.set_build_gui(False)
 ps.init()
 ps.register_surface_mesh("mesh", vertices[0], faces,
                          color=[0, 91 / 255, 255 / 255],
-                         edge_width=0.3,
+                         edge_width=0.003,
                          edge_color=[1, 1, 1],
                          smooth_shade=True,
                          # material="flat"
@@ -32,7 +33,7 @@ ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','sha
 # ps.set_ground_plane_height(-0.001)  # 设置地平面高度
 ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
 ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
-ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
-ps.set_front_dir('z_front')  # 设置z轴正方向向前
+ps.set_up_dir("z_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
+ps.set_front_dir('neg_y_front')  # 设置z轴正方向向前
 ps.set_SSAA_factor(4)  # 在截图时，设置为4时，截图会更清晰
 ps.show()

@@ -14,7 +14,8 @@ model = SMPL(gender="female").to(device)  # 将SMPL模型放到GPU上
 params = model.get_rest_pose(batch_dims=(1,))
 
 # 设置shape参数
-params["shape"] = torch.tensor([[2.0, 1, 0, 0, 0, 0, 0, 0, 0, 0]], dtype=torch.float32, device=device)
+params["shape"] = torch.tensor([[1.0, -2, 0, 0, 0, 0, 0, 0, 0, 0]],
+                               dtype=torch.float32, device=device)
 
 vertices = model.forward_vertices(**params)
 skeleton = model.forward_skeleton(**params)
@@ -24,6 +25,7 @@ vertices = vertices[0].cpu().numpy()
 faces = faces.cpu().numpy()
 
 ps.init()
+ps.set_build_gui(False)
 ps.register_surface_mesh("mesh", vertices, faces,
                          color=[0, 91 / 255, 255 / 255],
                          edge_width=0.003,

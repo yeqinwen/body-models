@@ -16,6 +16,7 @@ print(type(vertices))
 print(type(faces))
 print(type(skeleton))
 
+ps.set_build_gui(False)
 ps.init()
 ps.register_surface_mesh("mesh", vertices[0], faces,
                          color=[0, 91 / 255, 255 / 255],

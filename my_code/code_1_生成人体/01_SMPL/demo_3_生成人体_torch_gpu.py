@@ -32,6 +32,7 @@ print(type(skeleton))
 vertices = vertices[0].cpu().numpy()
 faces = faces.cpu().numpy()
 
+ps.set_build_gui(False)
 ps.init()
 ps.register_surface_mesh("mesh", vertices, faces,
                          color=[0, 91 / 255, 255 / 255],
