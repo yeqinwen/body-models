@@ -42,6 +42,11 @@ initial_A_pose = params["body_pose"].clone().detach().to(device)
 star_v_np = vertices[0].cpu().numpy()
 star_f_np = model.faces.cpu().numpy()
 
+print(star_f_np.shape)
+print(star_f_np)
+breakpoint()
+
+
 # ==================== 4. 加载扫描人体 ====================
 path = "dhu_scan_1_sc.obj"
 verts, faces, aux = load_obj(path)

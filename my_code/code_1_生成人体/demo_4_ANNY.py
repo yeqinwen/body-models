@@ -17,11 +17,15 @@ print(faces.shape)
 print(vertices)
 print(faces)
 
+print(vertices.shape,faces.shape)
+# torch.Size([1, 13718, 3]) torch.Size([13710, 4])
+
+
 ps.set_build_gui(False)
 ps.init()
 ps.register_surface_mesh("mesh", vertices[0], faces,
                          color=[0, 91 / 255, 255 / 255],
-                         edge_width=0.003,
+                         edge_width=0.3,
                          edge_color=[1, 1, 1],
                          smooth_shade=True,
                          # material="flat"
