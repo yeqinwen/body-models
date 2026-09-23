@@ -12,10 +12,11 @@ ms.load_new_mesh('final_scan.obj')
 m = ms.current_mesh()
 scan_v, scan_f = m.vertex_matrix(), m.face_matrix()
 
+ps.set_build_gui(False)
 ps.init()
 ps.register_surface_mesh("star", star_v, star_f,
                          color=np.array([0, 91, 255]) / 255,
-                         edge_width=0.001,
+                         edge_width=0.003,
                          edge_color=[1, 1, 1],
                          smooth_shade=True,
                          # material="flat"

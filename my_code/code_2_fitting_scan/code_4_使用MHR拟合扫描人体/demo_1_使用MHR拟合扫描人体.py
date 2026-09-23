@@ -43,7 +43,7 @@ star_v_np = vertices[0].cpu().numpy()
 star_f_np = model.faces.cpu().numpy()
 
 # ==================== 4. 加载扫描人体 ====================
-path = "dhu_scan_1_sc.obj"
+path = "rotate_scan.obj"
 verts, faces, aux = load_obj(path)
 scan_v_np = verts.cpu().numpy()
 scan_f_np = faces.verts_idx.cpu().numpy()
