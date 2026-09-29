@@ -1,4 +1,3 @@
-# from body_models.smpl.numpy import SMPL
 from body_models.smplh.torch import SMPLH
 import torch
 import numpy as np

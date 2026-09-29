@@ -1,4 +1,3 @@
-# from body_models.smpl.numpy import SMPL
 from body_models.smplx.torch import SMPLX
 import torch
 import numpy as np
@@ -14,8 +13,13 @@ model = SMPLX(gender="female").to(device)  # 将SMPL模型放到GPU上
 params = model.get_rest_pose(batch_dims=(1,))
 
 # 设置shape参数
-params["shape"] = torch.tensor([[1.0, -2, 0, 0, 0, 0, 0, 0, 0, 0]],
-                               dtype=torch.float32, device=device)
+print(params["shape"])
+print(params["shape"].shape)
+
+params["shape"][0,0] = 1
+params["shape"][0,1] = -2
+
+print(params["shape"])
 
 vertices = model.forward_vertices(**params)
 skeleton = model.forward_skeleton(**params)

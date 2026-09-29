@@ -17,7 +17,7 @@ print(faces.shape)
 print(vertices)
 print(faces)
 
-print(vertices.shape,faces.shape)
+print(vertices.shape, faces.shape)
 # torch.Size([1, 13718, 3]) torch.Size([13710, 4])
 
 

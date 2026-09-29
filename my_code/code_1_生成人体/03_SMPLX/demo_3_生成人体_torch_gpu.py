@@ -1,4 +1,3 @@
-# from body_models.smpl.numpy import SMPL
 from body_models.smplx.torch import SMPLX
 import torch
 import polyscope as ps
