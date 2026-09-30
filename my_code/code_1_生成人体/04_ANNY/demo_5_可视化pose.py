@@ -18,23 +18,15 @@ faces = model.faces
 vertices = vertices[0].cpu().numpy()
 faces = faces.cpu().numpy()
 
-J = skeleton[0].cpu().numpy()  # [24, 4, 4]
-joints = J[:, :3, 3]  # [24, 3]  每个关节的 (x, y, z)
+J = skeleton[0].cpu().numpy()
+joints = J[:, :3, 3]
 
 
 print(joints)
 print(joints.shape)
 
-# SMPL 关节父子连接表 (parent, child)
-# bones = [
-#     (0, 1), (0, 2), (0, 3),  # 骨盆 -> 左右髋、脊柱
-#     (1, 4), (4, 7), (7, 10),  # 左腿: 髋->膝->踝->脚
-#     (2, 5), (5, 8), (8, 11),  # 右腿
-#     (3, 6), (6, 9), (9, 12),  # 脊柱: spine1->2->3->neck
-#     (9, 13), (13, 16), (16, 18), (18, 20), (20, 22),  # 左臂
-#     (9, 14), (14, 17), (17, 19), (19, 21), (21, 23),  # 右臂
-#     (12, 15),  # 脖子 -> 头
-# ]
+# 关节父子连接表 (parent, child)
+# bones = [ ]
 
 
 ps.init()

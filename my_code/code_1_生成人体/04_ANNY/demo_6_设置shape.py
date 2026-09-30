@@ -12,9 +12,12 @@ else:
 model = ANNY().to(device)  # 将SMPL模型放到GPU上
 params = model.get_rest_pose(batch_dims=(1,))
 
+print(params["shape"])
+# shape参数的初始值是
+# tensor([[0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000]], device='cuda:0')
+
 # 设置shape参数
-params["shape"] = torch.tensor([[0.5, 0, 0, 0, 0, 0]],
-                               dtype=torch.float32, device=device)
+params["shape"][0,1] = 0
 
 vertices = model.forward_vertices(**params)
 skeleton = model.forward_skeleton(**params)
@@ -27,7 +30,7 @@ ps.init()
 ps.set_build_gui(False)
 ps.register_surface_mesh("mesh", vertices, faces,
                          color=[0, 91 / 255, 255 / 255],
-                         edge_width=0.003,
+                         edge_width=0.3,
                          edge_color=[1, 1, 1],
                          smooth_shade=True,
                          # material="flat"

@@ -23,10 +23,6 @@ faces = model.faces
 vertices = vertices[0].cpu().numpy()
 faces = faces.cpu().numpy()
 
-print(params["body_pose"].shape)
-print(params["head_pose"].shape)
-print(params["hand_pose"].shape)
-
 ps.init()
 ps.register_surface_mesh("mesh", vertices, faces,
                          color=[0, 91 / 255, 255 / 255],

@@ -15,9 +15,9 @@ vertices = model.forward_vertices(**params)
 skeleton = model.forward_skeleton(**params)
 faces = model.faces
 
-print(vertices.shape)  # [1, 6890, 3]
-print(skeleton.shape)  # ([1, 24, 4, 4]
-print(faces.shape)  # [13776, 3]
+print(vertices.shape)
+print(skeleton.shape)
+print(faces.shape)
 
 for k, v in params.items():
     if torch.is_tensor(v):
